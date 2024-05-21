@@ -21,7 +21,7 @@ const forms = [
 ];
 const AllForm = () => {
   return (
-    <div className="flex flex-col w-full overflow-hidden py-10 px-20 lg:py-20">
+    <div className="flex flex-col w-full overflow-hidden py-10 px-20 lg:py-24 lg:mb-24">
       <h2 className="text-2xl md:text-4xl py-5 font-bold mb-6 uppercase text-center">
         ANMC all forms
       </h2>
