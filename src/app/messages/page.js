@@ -1,6 +1,7 @@
 "use clients";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import MessageViewer from "@/components/MessageViewer";
 import React from "react";
 
 const page = () => {
@@ -14,7 +15,9 @@ const page = () => {
           </h4>
         </div>
         {/*Form viewer*/}
-        <div></div>
+        <div>
+          <MessageViewer />
+        </div>
       </div>
       <Footer />
     </main>

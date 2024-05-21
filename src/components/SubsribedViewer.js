@@ -5,6 +5,7 @@ import { db } from "@/app/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { FaCopy } from "react-icons/fa6";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 
 const SubscribeViewer = () => {
@@ -44,9 +45,9 @@ const SubscribeViewer = () => {
           >
             <span>{email}</span>
             <CopyToClipboard text={email} onCopy={() => handleCopy(email)}>
-              <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700">
-                Copy
-              </button>
+              <div className="hover:text-blue-500 text-gray-500">
+                <FaCopy />
+              </div>
             </CopyToClipboard>
           </div>
         ))
