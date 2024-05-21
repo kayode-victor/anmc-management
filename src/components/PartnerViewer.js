@@ -43,8 +43,8 @@ const PartnerViewer = () => {
               key={index}
               className="bg-white p-4 rounded-md border-2 hover:border-blue-300 shadow-md"
             >
-              <div className="flex items-center px-4 justify-between">
-                <h3 className="font-semibold mb-2">{partner.name}</h3>
+              <div className="flex items-center px-4 mb-2 justify-between">
+                <h3 className="font-semibold ">{partner.name}</h3>
                 <div className="flex items-center justify-center gap-2">
                   <p className="text-gray-600 ">{partner.email}</p>
                   <CopyToClipboard
@@ -58,11 +58,19 @@ const PartnerViewer = () => {
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-blue-500">Company: {partner.company}</p>
+                <p className="text-gray-800">
+                  Company:{" "}
+                  <span className="text-blue-500 font-semibold">
+                    {partner.company || "none"}
+                  </span>
+                </p>
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-green-500">
-                  Offering: ₦{partner.offering || "0"}
+                <p className="text-gray-800">
+                  Offering:{" "}
+                  <span className="text-green-500 font-semibold">
+                    ₦ {partner.offering || "0"}
+                  </span>
                 </p>
               </div>
               <div className="flex items-center justify-between">

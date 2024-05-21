@@ -75,7 +75,12 @@ const RegViewer = () => {
                 </p>
               </div>
               <div className="flex items-center justify-between">
-                <p className="text-gray-800">Role: {reg.role}</p>
+                <p className="text-gray-800">
+                  Role::{" "}
+                  <span className="text-blue-500 font-semibold">
+                    {reg.role}
+                  </span>
+                </p>
               </div>
             </div>
           ))}

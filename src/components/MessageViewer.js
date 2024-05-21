@@ -41,8 +41,8 @@ const MessageViewer = () => {
             key={index}
             className="bg-white p-4 rounded-md border-2 hover:border-blue-300 shadow-md"
           >
-            <div className="flex items-center px-4 justify-between">
-              <h3 className="font-semibold mb-2">{message.name}</h3>
+            <div className="flex items-center mb-2 px-4 justify-between">
+              <h3 className="font-semibold ">{message.name}</h3>
               <div className="flex items-center justify-center gap-2">
                 <p className="text-gray-600 ">{message.email}</p>
                 <CopyToClipboard

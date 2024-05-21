@@ -36,21 +36,23 @@ const SubscribeViewer = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-4 px-10">
+    <div className="flex flex-col gap-4 px-10 md:px-16 lg:px-24">
       {subscribedEmails.length > 0 ? ( // Conditional rendering
-        subscribedEmails.map((email, index) => (
-          <div
-            key={index}
-            className="flex justify-between items-center bg-white p-4 rounded-md border shadow-md"
-          >
-            <span>{email}</span>
-            <CopyToClipboard text={email} onCopy={() => handleCopy(email)}>
-              <div className="hover:text-blue-500 text-gray-500">
-                <FaCopy />
-              </div>
-            </CopyToClipboard>
-          </div>
-        ))
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center gap-4">
+          {subscribedEmails.map((email, index) => (
+            <div
+              key={index}
+              className="flex justify-between items-center bg-white p-4 rounded-md border shadow-md"
+            >
+              <span>{email}</span>
+              <CopyToClipboard text={email} onCopy={() => handleCopy(email)}>
+                <div className="hover:text-blue-500 text-gray-500">
+                  <FaCopy />
+                </div>
+              </CopyToClipboard>
+            </div>
+          ))}
+        </div>
       ) : (
         <p className="text-blue-300 uppercase text-center text-3xl">
           No subscribed user
