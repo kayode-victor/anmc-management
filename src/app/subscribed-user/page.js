@@ -1,5 +1,7 @@
+"use clients";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import SubscribeViewer from "@/components/SubsribedViewer";
 import React from "react";
 
 const page = () => {
@@ -13,7 +15,10 @@ const page = () => {
           </h4>
         </div>
         {/*Form viewer*/}
-        <div></div>
+
+        <div>
+          <SubscribeViewer />
+        </div>
       </div>
       <Footer />
     </main>
