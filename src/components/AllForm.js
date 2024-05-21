@@ -18,6 +18,10 @@ const forms = [
     title: "Subscribed Users",
     link: "/subscribed-user",
   },
+  {
+    title: "Messages",
+    link: "/messages",
+  },
 ];
 const AllForm = () => {
   return (
