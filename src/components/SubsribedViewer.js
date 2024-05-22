@@ -1,13 +1,13 @@
 // components/SubscribeViewer.js
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { db } from "@/app/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { FaCopy } from "react-icons/fa6";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-
+import { useReactToPrint } from "react-to-print";
 const SubscribeViewer = () => {
   const [subscribedEmails, setSubscribedEmails] = useState([]);
 
@@ -34,6 +34,12 @@ const SubscribeViewer = () => {
       draggable: true,
     });
   };
+  // Ref for the hidden table we want to print
+  const componentToPrintRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentToPrintRef.current,
+  });
 
   return (
     <div className="flex flex-col gap-4 px-10 md:px-16 lg:px-24">
@@ -58,7 +64,33 @@ const SubscribeViewer = () => {
           No subscribed user
         </p>
       )}
+      {/* Hidden Table for Printing - Added to enable printing functionality */}
+      <div
+        className="hidden-from-screen flex mx-20 my-10"
+        ref={componentToPrintRef}
+      >
+        <table className="table-auto w-1/2 ">
+          <thead>
+            <tr className="bg-gray-300">
+              <th className="border px-4 py-2">Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {subscribedEmails.map((email, index) => (
+              <tr key={index} className="text-center">
+                <td className="border px-4 py-2">{email}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <ToastContainer />
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded mb-4 self-end"
+        onClick={handlePrint}
+      >
+        Print All
+      </button>
     </div>
   );
 };
