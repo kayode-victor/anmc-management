@@ -1,6 +1,6 @@
-// components/WorkViewer.js
+// app/components/WorkViewer.js
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { db } from "@/app/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import { ToastContainer, toast } from "react-toastify";
@@ -9,6 +9,7 @@ import { FaCopy } from "react-icons/fa6";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import Image from "next/image";
 import Link from "next/link";
+import { useReactToPrint } from "react-to-print";
 
 const WorkViewer = () => {
   const [works, setWorks] = useState([]);
@@ -38,12 +39,19 @@ const WorkViewer = () => {
     });
   };
 
+  // Ref for the hidden table we want to print
+  const componentToPrintRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentToPrintRef.current,
+  });
+
   return (
     <div className="flex flex-col gap-4 px-10 md:px-16 lg:px-24">
-      <ToastContainer />
-      {works.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {works.map((work, index) => (
+      {/* Displayed work items */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {works.length > 0 ? (
+          works.map((work, index) => (
             <div
               key={index}
               className="bg-white p-4 rounded-md border-2 hover:border-blue-300 shadow-md"
@@ -62,13 +70,13 @@ const WorkViewer = () => {
                   <Image
                     src={work.imageLink}
                     alt="Submission Image"
-                    width={400} // Adjust as needed
-                    height={150} // Adjust as needed
+                    width={400}
+                    height={150}
                     className="object-cover object-top w-full h-[280px]"
                   />
                 </Link>
               )}
-              <div className="flex items-center  my-2">
+              <div className="flex items-center  my-2">
                 <p className="text-gray-800">Website:</p>
                 <Link
                   href={work.websiteLink}
@@ -88,13 +96,46 @@ const WorkViewer = () => {
                 </CopyToClipboard>
               </div>
             </div>
-          ))}
-        </div>
-      ) : (
-        <p className="text-blue-300 uppercase text-center text-3xl">
-          No work submissions yet.
-        </p>
-      )}
+          ))
+        ) : (
+          <p className="text-blue-300 uppercase text-center text-3xl">
+            No work submissions yet.
+          </p>
+        )}
+      </div>
+      {/* Hidden Table for Printing - Added to enable printing functionality */}
+      <div
+        className="hidden-from-screen flex mx-20 my-10"
+        ref={componentToPrintRef}
+      >
+        <table className="table-auto w-full ">
+          <thead>
+            <tr className="bg-gray-300">
+              <th className="border px-4 py-2">Name</th>
+              <th className="border px-4 py-2">Email</th>
+              <th className="border px-4 py-2">Company</th>
+              <th className="border px-4 py-2">Website Link</th>
+            </tr>
+          </thead>
+          <tbody>
+            {works.map((work, index) => (
+              <tr key={index}>
+                <td className="border px-4 py-2">{work.name}</td>
+                <td className="border px-4 py-2">{work.email}</td>
+                <td className="border px-4 py-2">{work.company}</td>
+                <td className="border px-4 py-2">{work.websiteLink}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <ToastContainer />
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded mb-4 self-end"
+        onClick={handlePrint}
+      >
+        Print All
+      </button>
     </div>
   );
 };

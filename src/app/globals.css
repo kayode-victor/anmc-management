@@ -11,3 +11,14 @@
   transition: background-color 0.3s ease; /* Smooth transition for the background color */
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
+/* Hide by default */
+.hidden-from-screen {
+  display: none;
+}
+
+/* Show when printing */
+@media print {
+  .hidden-from-screen {
+    display: block;
+  }
+}

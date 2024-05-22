@@ -8,8 +8,8 @@ const page = () => {
   return (
     <main className="w-full flex flex-col gap-0 overflow-hidden">
       <Header />
-      <div className="flex flex-col gap-5 my-20">
-        <div className="px-10 text-center lg:text-left">
+      <div className="flex flex-col gap-5 my-20 md:my-24">
+        <div className="px-10 text-center lg:text-left lg:mx-14">
           <h4 className="text-gray-700 font-medium uppercase text-xl">
             All subscribed Email
           </h4>
